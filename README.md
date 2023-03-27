@@ -9,8 +9,8 @@ Periods of large volatilities tend to be followed by more periods of large volat
 In this project, we will use GARCH to model and forecast the volatilities of three Exchange-Traded Funds (ETFs) from three geographic regions, the United States, East Asia, and South-East Asia. Perhaps of note, our time series will include the 2020 stock market crash due to the COVID-19 pandemic.
 
 # GOALS: 
-- ) Model the volatilities of three ETFs localized in three geographic regions 
-- ) Forecast the next month's volatilities
+-  Model the volatilities of three ETFs localized in three geographic regions 
+-  Forecast the next month's volatilities
 
 # Data Source:
 Market data from Yahoo! finance loaded using the yfinance library
@@ -48,11 +48,41 @@ This indicates that the original assumption of normally distributed innovations 
 # Results
 
 ## Final models
-Our final models are (all with Student-t distributed errors):
-- ) SPY: GARCH(1,1)
-- ) AIA: GARCH(1,1)
-- ) ASEA: ARCH(3,0)
+Our final models for the three ETFs are (all with Student-t distributed errors):
+-  SPY: GARCH(1,1)
+-  AIA: GARCH(1,1)
+-  ASEA: ARCH(3,0)
 
-## Predictions
+## In-sample and rolling volatilities
+To see how our models perform in the timeframe where we have data, we generated two kinds of predictions: in-sample and rolling. 
 
+In-sample predictions: the GARCH models that generate these predictions saw all the available data at once during fitting.
+Rolling predictions: in a rolling prediction, we assume that we start at day 0 (at the beginning of the dataset) and see each datapoint sequentially one by one. After every new datapoint, the model for each ETF is updated with the true value of the time series and generate a prediction for the next point. This simulates the situation in real life, where we get to see the datapoints one day at a time.
 
+The modelled volatilities (both in-sample and rolling) for each stock can be seen below overplotted over the daily returns:
+
+![vol_pred_roll](https://user-images.githubusercontent.com/5288149/227816533-1d1ab428-ed5c-48ba-a494-2ae73303e915.png)
+
+Both in-sample and rolling predictions show that when the ETF prices rise/fall sharply, the volatilities spike, which is what we expected!
+
+## Forecasts
+Finally, we used the GARCH models to produce a forecast of the volatilities for the 21 days (1 month) after the end of the dataset.
+
+![vol_next_month](https://user-images.githubusercontent.com/5288149/227817358-968e190f-4ead-4f5a-8de6-914860bca606.png)
+
+The notches in the box plots mark 95% confidence intervals. Note that in GARCH models, the first step forecasts (day 0 of the next month) is deterministic, meaning that it has no confidence interval!  
+
+# Future improvements and directions
+There are some aspects of the project that can be improved or explored further in the future, here are some of them:
+
+#### Modelling asymmetric responses:
+The GARCH model assumes that the stock volatilities have symmetric response, meaning that the volatilities change symmetrically irrespective of whether the stock prices increase or decrease. In reality, stock volatilities tend to rise higher when the stock price drops than if it rises by an equal magnitude – the volatility index VIX tend to move up when the S&P 500 falls down. A more complicated model like the Glosten-Jagannathan-Runkle
+(GJR)-GARCH can be used to model this effect. 
+
+#### Modelling seasonal effects:
+We saw hints of seasonality in the ASEA ETF for what might be seasonal effects with a seasonal lag=3. These kinds of behaviors can be modelled by creating a more complex mean-model.
+
+#### More (or more localized) geographical samples:
+
+#### More complex non-linear models:
+XGBoost etc
