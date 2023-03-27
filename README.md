@@ -39,4 +39,4 @@ After this initial procedure, the model is validated in the following way:
 
 In step 3), we are checking that our assumption of normally distributed innovation is appropriate. While the 
 
-[residual_normal.pdf](https://github.com/pierrechristian/ETF-volatility-forecasting/files/11073541/residual_normal.pdf)
+![residual_normal](https://user-images.githubusercontent.com/5288149/227815255-af7e4598-b98e-4ea2-9864-ebe2445cd15f.png)
