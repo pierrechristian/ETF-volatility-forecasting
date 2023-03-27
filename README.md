@@ -32,11 +32,27 @@ The time series were initially modelled with the GARCH model with normally distr
 1) A grid search was performed over the p, q order parameters, the model with the lowest AIC is taken as candidate
 2) The t-statistics of the candidate model parameters were inspected to ensure their statistical significance
 
-After this initial procedure, the model is validated in the following way:
+After this initial procedure, the appropriateness of the models were inspected in the following ways:
 1) ACF and PACF plots of the squared standarized residuals were inspected for leftover (unmodelled) GARCH effects
 2) Ljung-Box (LB) tests were conducted on the squared standarized residuals; a small LB p-value indicates that there might be leftover GARCH effects that are not modelled by our candidate GARCH processes
-3) The histogram of the standarized residuals are plotted over the normal distribution to check for deviations from normality 
+3) The histogram of the standarized residuals are plotted over the normal distribution to check for deviations from normality; this checks whether our assumption of normally distributed innovations was appropriate
 
-In step 3), we are checking that our assumption of normally distributed innovation is appropriate. While the 
+While the models were appropriate based on 1) and 2) (indicating that most of the GARCH effects were succesfully modelled by our chosen GARCH order parameters), the histogram from 3) show deviations from normal distribution:
 
 ![residual_normal](https://user-images.githubusercontent.com/5288149/227815255-af7e4598-b98e-4ea2-9864-ebe2445cd15f.png)
+
+This indicates that the original assumption of normally distributed innovations is not appropriate: the residual distributions overshoot the normal distribution near the mean, but are still quite symmetric. Given these observations, we re-modelled the time series, this time assuming Student-t distributed innovations. The same steps from before were used. This time, the histogram of standarized residuals are well fitted with our assumed distribution, the Student-t distribution:
+
+![residual_student-t](https://user-images.githubusercontent.com/5288149/227815771-668f1831-0006-4352-9055-30efbed6be86.png)
+
+# Results
+
+## Final models
+Our final models are (all with Student-t distributed errors):
+- ) SPY: GARCH(1,1)
+- ) AIA: GARCH(1,1)
+- ) ASEA: ARCH(3,0)
+
+## Predictions
+
+
