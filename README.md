@@ -22,7 +22,9 @@ Daily time series of prices from 01/01/2018 to 02/20/2023 for the following thre
 -  ASEA (Global X FTSE Southeast Asia ETF): tracks 40 of the largest South East Asian stocks
 
 The daily returns of these ETFs are plotted below:
-![daily_returns](https://user-images.githubusercontent.com/5288149/227814390-adec6c12-35c7-4993-bb5c-0035b945dd89.png)
+
+![daily_returns](https://user-images.githubusercontent.com/5288149/227814758-d17fda74-f86c-4ff0-8b56-54c187b4d880.png)
+
 Notice the spike in volatility in 2020, which is brought upon by COVID-19 pandemic.
 
 # Methodology:
