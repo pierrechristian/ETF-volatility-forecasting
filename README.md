@@ -28,7 +28,15 @@ The daily returns of these ETFs are plotted below:
 Notice the spike in volatility in 2020, which is brought upon by COVID-19 pandemic.
 
 # Methodology:
-The time series were modelled with the GARCH model. Instead of manually guessing for the best GARCH order parameters, we performed the following procedure:
+The time series were initially modelled with the GARCH model with normally distributed innovations. Instead of manually guessing for the best GARCH order parameters, we performed the following procedure:
 1) A grid search was performed over the p, q order parameters, the model with the lowest AIC is taken as candidate
-2) The t-statistics of the candidate model parameters are inspected to ensure that they are significant 
+2) The t-statistics of the candidate model parameters were inspected to ensure their statistical significance
 
+After this initial procedure, the model is validated in the following way:
+1) ACF and PACF plots of the squared standarized residuals were inspected for leftover (unmodelled) GARCH effects
+2) Ljung-Box (LB) tests were conducted on the squared standarized residuals; a small LB p-value indicates that there might be leftover GARCH effects that are not modelled by our candidate GARCH processes
+3) The histogram of the standarized residuals are plotted over the normal distribution to check for deviations from normality 
+
+In step 3), we are checking that our assumption of normally distributed innovation is appropriate. While the 
+
+[residual_normal.pdf](https://github.com/pierrechristian/ETF-volatility-forecasting/files/11073541/residual_normal.pdf)
