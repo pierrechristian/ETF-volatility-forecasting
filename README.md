@@ -80,9 +80,13 @@ The GARCH model assumes that the stock volatilities have symmetric response, mea
 (GJR)-GARCH can be used to model this effect. 
 
 #### Modelling seasonal effects:
-We saw hints of seasonality in the ASEA ETF for what might be seasonal effects with a seasonal lag=3. These kinds of behaviors can be modelled by creating a more complex mean-model.
+We saw hints of seasonality in the ASEA ETF for what might be seasonal effects with a seasonal lag=3. These kinds of behaviors can be modelled by creating more complex models. 
 
-#### More (or more localized) geographical samples:
+#### More geographical samples:
+We performed our analysis for ETFs in three geographical areas. If we are interested in how market volatilities in different geographical regions behave, we can perform the same procedure to ETFs in different geographical regions. 
 
 #### More complex non-linear models:
-XGBoost etc
+GARCH assumes a linear relationship between the conditional variance, its lagged values, and the lagged squared errors. In reality, there could be more complex relationships between these quantities. By treating the lagged variances and squared errors as features, non-linear machine learning techniques (e.g., gradient boosted trees) can be used to try model these non-linear relationships.
+
+#### Modelling relationships between the volatilities:
+Now that we have obtained a time series for the volatilities, it might be interesting to seek relationships between the volatilities in different geographical regions. It might also be interesting to find similar relationships between the time series of market volatilities in a certain geographical region with other time-series pertinent to that locale (e.g., the COVID-19 cases/immunization time series in different regions, local temperatures, etc). This could be done through modelling with vector autoregression or more complex non-linear models. 
